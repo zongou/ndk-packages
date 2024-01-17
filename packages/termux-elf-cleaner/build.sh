@@ -2,6 +2,8 @@
 
 . ./config
 
+## this package is linked to libc++_shared.so
+
 PKG_HOMEPAGE=https://github.com/termux/termux-elf-cleaner
 PKG_DESCRIPTION="Cleaner of ELF files for Android"
 PKG_LICENSE="GPL-3.0"
