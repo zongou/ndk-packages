@@ -47,3 +47,5 @@ Source code archives are available at specific URLs for each repository. For exa
 | Commit          | `aef66c4`            | <https://github.com/github/codeql/archive/**aef66c462abe817e33aad91d97aa782a1e2ad2c7**.zip> |
 
 **Note**: You can use either `.zip` or `.tar.gz` in the URLs above to request a zipball or tarball respectively.
+
+<https://repology.org/projects/>
