@@ -17,7 +17,7 @@ cd "${BUILD_DIR}/${PKG_BASENAME}"
 cp "${WORK_DIR}/packages/termux-elf-cleaner/android-api-level.diff" .
 
 autoreconf -vfi
-sed "s%@ANDROID_TARGET_API@%${ANDROID_TARGET_API}%g" android-api-level.diff | patch --silent -p1
+sed "s%@ANDROID_TARGET_API@%${ANDROID_TARGET_API}%g" android-api-level.diff | patch -up1
 
 ./configure --host="${TARGET}" --prefix="${OUTPUT_DIR}"
 make -j"${JOBS}" install
