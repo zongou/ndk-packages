@@ -64,6 +64,9 @@ if ! "${CONFIG_LOADED+1}"; then
 	## pkg-conf
 	export PKG_CONFIG_PATH="${OUTPUT_DIR}/lib/pkgconfig"
 
+	## autoconf
+	export FORCE_UNSAFE_CONFIGURE=1
+
 	## Mirror
 	# GNU_MIRROR=https://mirrors.kernel.org
 	# GNU_MIRROR=https://mirrors.tuna.tsinghua.edu.cn
