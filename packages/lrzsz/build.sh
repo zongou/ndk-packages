@@ -2,10 +2,6 @@
 
 . ./config
 
-# if test -f "${OUTPUT_DIR}/lib/libz.a"; then
-# 	exit
-# fi
-
 ## Prepare source
 PKG_HOMEPAGE=https://ohse.de/uwe/software/lrzsz.html
 PKG_DESCRIPTION="Tools for zmodem/xmodem/ymodem file transfer"
