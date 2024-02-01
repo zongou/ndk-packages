@@ -2,7 +2,9 @@
 
 . ./config
 
-"${WORK_DIR}/packages/libtalloc/build.sh"
+# Requires gawk
+
+"${WORK_DIR}/pending_packages/libtalloc/build.sh"
 
 PKG_HOMEPAGE=https://proot-me.github.io/
 PKG_DESCRIPTION="Emulate chroot, bind mount and binfmt_misc for non-root users"
@@ -16,9 +18,9 @@ PKG_BASENAME=proot-master
 PKG_SRCURL=https://github.com/termux/proot/archive/master${PKG_EXTNAME}
 # PKG_EXTRA_MAKE_ARGS="-C src"
 
-# get_source
+get_source
 cd "${BUILD_DIR}/${PKG_BASENAME}"
-# patch -up1 <"${WORK_DIR}/packages/proot/base.patch"
+patch -up1 <"${WORK_DIR}/pending_packages/proot/base.patch"
 # patch -up1 <"${WORK_DIR}/packages/proot/proot-try-TMPDIR.patch"
 cd src
 
@@ -36,7 +38,7 @@ export LDFLAGS="-L${OUTPUT_DIR}/lib -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
 
 make distclean || true
 # export OBJCOPY="zig objcopy"
-make V=1 "PREFIX=${OUTPUT_DIR}" -j"${JOBS}" install
+make V=1 "PREFIX=${OUTPUT_DIR}" STRIP="${STRIP}" -j"${JOBS}" install
 
 file proot
 du -ahd0 proot
