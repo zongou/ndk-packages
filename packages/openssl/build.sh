@@ -11,7 +11,7 @@ PKG_HOMEPAGE=https://www.openssl.org/
 PKG_DESCRIPTION="Library implementing the SSL and TLS protocols as well as general purpose cryptography functions"
 PKG_LICENSE="Apache-2.0"
 
-PKG_VERSION="3.2.0"
+PKG_VERSION="3.2.1"
 PKG_BASENAME=openssl-${PKG_VERSION}
 PKG_EXTNAME=.tar.gz
 PKG_SRCURL=https://www.openssl.org/source/${PKG_BASENAME}${PKG_EXTNAME}
