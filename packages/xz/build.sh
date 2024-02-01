@@ -11,7 +11,7 @@ PKG_VERSION="5.4.5"
 PKG_BASENAME="xz-${PKG_VERSION}"
 PKG_EXTNAME=.tar.gz
 # PKG_SRCURL=https://tukaani.org/xz/${PKG_BASENAME}${PKG_EXTNAME}
-PKG_SRCURL=https://github.com/tukaani-project/xz/releases/download/v${PKG_VERSION}/${PKG_BASENAME}${PKG_EXTNAME}
+PKG_SRCURL=https://ghproxy.net/https://github.com/tukaani-project/xz/releases/download/v${PKG_VERSION}/${PKG_BASENAME}${PKG_EXTNAME}
 
 get_source
 cd "${BUILD_DIR}/${PKG_BASENAME}"
@@ -24,6 +24,7 @@ export LDFLAGS="-w -s"
 ./configure \
 	--enable-static \
 	--disable-shared \
-	--prefix="${OUTPUT_DIR}"
+	--prefix="${OUTPUT_DIR}" \
+	--host="${TARGET}"
 
 make -j"${JOBS}" install

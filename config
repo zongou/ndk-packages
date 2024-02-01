@@ -4,8 +4,7 @@
 if ! "${CONFIG_LOADED+1}"; then
 	set -eux
 
-	export ANDROID_NDK_ROOT=/media/user/SAMSUNG_64GB/programs/mini-ndk/
-	export PATH="${PATH}:${ANDROID_NDK_ROOT}/bin"
+	export PATH="${PATH}:${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
 	export TARGET="${TARGET:-aarch64-linux-android24}"
 
@@ -22,6 +21,7 @@ if ! "${CONFIG_LOADED+1}"; then
 	for tool in ar objcopy ld lld strip objdump ranlib; do
 		for pattern in "${TOOLCHAIN_BIN_DIR}/${TARGET}-${tool}" "${TOOLCHAIN_BIN_DIR}/llvm-${tool}" "${TOOLCHAIN_BIN_DIR}/${tool}"; do
 			if command -v "${pattern}" >/dev/null; then
+				echo export "$(echo ${tool} | tr "[:lower:]" "[:upper:]")=${pattern}"
 				export "$(echo ${tool} | tr "[:lower:]" "[:upper:]")=${pattern}"
 				break
 			fi
@@ -100,13 +100,13 @@ if ! "${CONFIG_LOADED+1}"; then
 		rm -rf "${BUILD_DIR:?}/${PKG_BASENAME}"
 		case "${PKG_EXTNAME}" in
 		.tar.gz)
-			gzip -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -xv
+			gzip -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
 			;;
 		.tar.xz)
-			xz -T0 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -xv
+			xz -T0 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
 			;;
 		.tar.bz2)
-			bzip2 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -xv
+			bzip2 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
 			;;
 		esac
 	}

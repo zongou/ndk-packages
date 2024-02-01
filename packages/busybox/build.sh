@@ -28,11 +28,13 @@ patch -up1 <"${WORK_DIR}/packages/busybox/0012-util-linux-mount-no-addmntent.pat
 # Prevent spamming logs with useless warnings to make them more readable.
 export CFLAGS="-Wno-ignored-optimization-argument -Wno-unused-command-line-argument"
 
-if command -v clang >/dev/null; then
-	HOSTCC=clang
+if command -v "${TOOLCHAIN_BIN_DIR}/clang" >/dev/null; then
+	HOSTCC="${TOOLCHAIN_BIN_DIR}/clang"
 elif command -v gcc >/dev/null; then
 	HOSTCC=gcc
 fi
+
+HOSTCC="zig cc --target=x86_64-linux-musl"
 
 make ${HOSTCC:+HOSTCC="${HOSTCC}"} CC="${CC}" AR="${AR}" -j"${JOBS}" busybox_unstripped
 
