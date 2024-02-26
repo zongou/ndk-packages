@@ -24,10 +24,7 @@ PKG_BASENAME=ttyd-${PKG_VERSION}
 PKG_EXTNAME=.tar.gz
 PKG_SRCURL=https://github.com/zongou/ttyd/archive/refs/heads/main.tar.gz
 
-if ! test -d "${BUILD_DIR}/${PKG_BASENAME}"; then
-	get_source
-fi
-
+get_source
 cd "${BUILD_DIR}/${PKG_BASENAME}"
 
 rm -rf build && mkdir build && cd build

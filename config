@@ -92,23 +92,25 @@ if ! "${CONFIG_LOADED+1}"; then
 	export JOBS
 
 	get_source() {
-		if ! test -f "${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}"; then
-			curl -Lk "${PKG_SRCURL}" >"${SRCS_DIR}/${PKG_BASENAME}.tmp"
-			mv "${SRCS_DIR}/${PKG_BASENAME}.tmp" "${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}"
-		fi
+		if ! test -d "${BUILD_DIR}/${PKG_BASENAME}"; then
+			if ! test -f "${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}"; then
+				curl -Lk "${PKG_SRCURL}" >"${SRCS_DIR}/${PKG_BASENAME}.tmp"
+				mv "${SRCS_DIR}/${PKG_BASENAME}.tmp" "${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}"
+			fi
 
-		rm -rf "${BUILD_DIR:?}/${PKG_BASENAME}"
-		case "${PKG_EXTNAME}" in
-		.tar.gz)
-			gzip -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
-			;;
-		.tar.xz)
-			xz -T0 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
-			;;
-		.tar.bz2)
-			bzip2 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
-			;;
-		esac
+			rm -rf "${BUILD_DIR:?}/${PKG_BASENAME}"
+			case "${PKG_EXTNAME}" in
+			.tar.gz)
+				gzip -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
+				;;
+			.tar.xz)
+				xz -T0 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
+				;;
+			.tar.bz2)
+				bzip2 -d <"${SRCS_DIR}/${PKG_BASENAME}${PKG_EXTNAME}" | tar -C "${WORK_DIR}/build" -x${TAR_VERBOSE+v}
+				;;
+			esac
+		fi
 	}
 
 	export CONFIG_LOADED=true

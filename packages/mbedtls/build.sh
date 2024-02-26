@@ -7,7 +7,7 @@ if test -f "${OUTPUT_DIR}/lib/libmbedtls.a"; then
 fi
 
 ## Prepare source
-PKG_VERSION="3.5.1"
+PKG_VERSION="3.5.2"
 PKG_BASENAME=mbedtls-${PKG_VERSION}
 PKG_EXTNAME=.tar.gz
 PKG_SRCURL="https://github.com/Mbed-TLS/mbedtls/archive/v${PKG_VERSION}.tar.gz"
